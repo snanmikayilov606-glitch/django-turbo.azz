@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <title>Turbo.az Clone</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        h1 { color: #2c3e50; }
+        .car-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .car-card { background: white; border-radius: 8px; width: 280px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden; transition: 0.3s; }
+        .car-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
+        .car-img { width: 100%; height: 180px; object-fit: cover; background-color: #e0e0e0; }
+        .car-info { padding: 15px; }
+        .car-title { font-size: 18px; font-weight: bold; color: #333; text-decoration: none; display: block; margin-bottom: 10px; }
+        .car-title:hover { color: #e74c3c; }
+        .car-price { color: #e74c3c; font-size: 16px; font-weight: bold; }
+        .car-year { color: #7f8c8d; font-size: 14px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Turbo.az Elanları</h1>
+
+    <div class="car-grid">
+        {% for car in cars %}
+            <div class="car-card">
+                {% if car.image %}
+                    <img src="{{ car.image.url }}" alt="{{ car.title }}" class="car-img">
+                {% endif %}
+                <div class="car-info">
+                    <a href="{% url 'detail' car.id %}" class="car-title">{{ car.title }}</a>
+                    <div class="car-price">{{ car.price }} $</div>
+                    <div class="car-year">İl: {{ car.year }}</div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Hələ ki heç bir elan yoxdur.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

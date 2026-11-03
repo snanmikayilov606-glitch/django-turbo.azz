@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ car.title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .detail-container { background: white; max-width: 600px; margin: 0 auto; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .detail-img { width: 100%; max-height: 350px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; }
+        h1 { color: #2c3e50; }
+        .price { color: #e74c3c; font-size: 22px; font-weight: bold; margin-bottom: 15px; }
+        .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #f9f9f9; padding: 15px; border-radius: 6px; margin-bottom: 15px; }
+        .spec-item { font-size: 15px; color: #333; }
+        .desc { color: #555; margin-bottom: 15px; font-size: 16px; line-height: 1.5; }
+        .back-btn { display: inline-block; text-decoration: none; background: #3498db; color: white; padding: 10px 15px; border-radius: 4px; }
+        .back-btn:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="detail-container">
+        {% if car.image %}
+            <img src="{{ car.image.url }}" alt="{{ car.title }}" class="detail-img">
+        {% endif %}
+        <h1>{{ car.title }}</h1>
+        <div class="price">Qiymət: {{ car.price }} $</div>
+        
+        <div class="specs">
+            <div class="spec-item"><b>Buraxılış ili:</b> {{ car.year }}</div>
+            <div class="spec-item"><b>Mühərrik:</b> {{ car.engine|default:"Göstərilməyib" }}</div>
+            <div class="spec-item"><b>Yürüş:</b> {{ car.mileage|default:"0" }} km</div>
+            <div class="spec-item"><b>Sürətlər qutusu:</b> {{ car.transmission|default:"Göstərilməyib" }}</div>
+        </div>
+
+        <div class="desc"><b>Ətraflı məlumat:</b> {{ car.description }}</div>
+        
+        <a href="{% url 'index' %}" class="back-btn">← Ana səhifəyə qayıt</a>
+    </div>
+</body>
+</html>
